@@ -65,6 +65,13 @@ account    sufficient    pam_permit.so\n\
 session    sufficient    pam_permit.so\n\
 ' > /etc/pam.d/sudo
 
+# Force newer version of GIT
+RUN yum erase -y git && yum install -y \
+    https://packages.endpoint.com/rhel/7/os/x86_64/endpoint-repo-1.7-1.x86_64.rpm && \
+    yum install -y git && \
+    yum clean all && \
+    rm -rf /var/cache/yum/* /tmp/* /var/tmp/*
+
 ENV LC_ALL=en_US.utf-8
 ENV LANG=en_US.utf-8
 
